@@ -1,29 +1,115 @@
+/* Global Styles */
 body {
-    font-family: Arial, sans-serif;
+    font-family: "Plus Jakarta Sans", sans-serif !important;
     display: flex;
     flex-direction: column;
+    min-height: 100vh;
+}
+
+.container {
+    flex: 1;
+}
+
+
+/* Navbar */
+.navbar {
+    height: 5rem;
+    background-color: white;
+    transition: background-color 0.3s ease; /* Smooth transition */
+}
+
+.navbar-collapse.collapse.show {
+    background-color: rgba(250, 249, 249, 0.95);
+    font-size: 1rem;
+    margin: 0.5rem 0;
+    padding: 0.2rem;
+}
+
+.fa-compass {
+    color: #fe424d;
+    font-size: 2rem;
+}
+
+.nav-link {
+    color: #222222 !important;
+}
+
+/* Media Queries for smaller screens */
+@media (max-width: 768px) {
+    .navbar {
+        height: 4rem;
+    }
+
+    .fa-compass {
+        font-size: 1.5rem;
+    }
+
+    .nav-link {
+        font-size: 0.9rem;
+    }
+
+    .navbar-toggler {
+        font-size: 1.25rem;
+    }
+}
+
+
+
+/* Footer */
+.f-info-links a {
+    text-decoration: none;
+    color: #222222;
+}
+
+.f-info-links a:hover {
+    text-decoration: underline;
+}
+
+.f-info-links,
+.f-info-socials,
+.f-info-brand {
+    width: 100%;
+    display: flex;
     align-items: center;
-    margin-top: 50px;
+    justify-content: center;
 }
 
-form {
+.f-info-socials i {
+    font-size: 1.2rem;
+    margin-right: 1rem;
+}
+
+.f-info {
+    height: 8rem;
+    text-align: center;
+    background-color: #ebebeb;
     display: flex;
-    flex-direction: column;
-    width: 300px;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
 }
 
-label, input, button {
-    margin-bottom: 15px;
+@media (max-width: 768px) {
+    .f-info {
+        flex-direction: column;
+        text-align: center;
+        height: auto;
+        padding: 1rem;
+    }
+
+    .f-info-socials {
+        margin-bottom: 0.5rem;
+    }
+
+    .f-info-socials i {
+        font-size: 1.5rem;
+        margin-right: 0.5rem;
+    }
+
+    .f-info-links a {
+        font-size: 0.9rem;
+        margin-bottom: 1rem;
+    }
 }
 
-button {
-    padding: 10px;
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    cursor: pointer;
-}
 
-button:hover {
-    background-color: #45a049;
-}

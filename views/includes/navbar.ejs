@@ -1,0 +1,43 @@
+<nav class="navbar navbar-expand-lg bg-body-dark border-bottom sticky-top">
+    <div class="container-fluid">
+        <!-- SkillColab Brand -->
+        <a class="navbar-brand" href="/dashboard">
+            <i class="fa-solid fa-laptop-code" style="font-size: 1.5rem;"></i> <!-- Replaced icon with laptop code -->
+            <span class="ms-2"><b>SkillColab</b></span> <!-- Added text to the brand -->
+        </a>
+
+        <!-- Navbar Toggler (for smaller screens) -->
+        <button
+                class="navbar-toggler"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#navbarNavAltMarkup"
+                aria-controls="navbarNavAltMarkup"
+                aria-expanded="false"
+                aria-label="Toggle navigation"
+                id="navbar-toggler"
+        >
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- Navbar Links -->
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+                <a class="nav-link" href="/dashboard"><b>Explore</b></a>
+            </div>
+            <div class="navbar-nav ms-auto">
+                <% if(!currUser) { %>
+                    <!-- Login Link for non-authenticated users -->
+                    <a class="nav-link" href="/login"><b>Login</b></a>
+                <% } %>
+                <% if(currUser) { %>
+                    <!-- Profile Icon for authenticated users -->
+                    <a class="nav-link" href="/profile">
+                        <i class="fa fa-user-circle" style="font-size: 1.5rem; color: #333;"></i>
+                    </a>
+                <% } %>
+            </div>
+        </div>
+    </div>
+</nav>
+

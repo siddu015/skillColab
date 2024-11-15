@@ -1,14 +1,20 @@
+// app.js
 const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
 const path = require("path");
 const methodOverride = require('method-override');
 const ejsMate = require("ejs-mate");
-const User = require("./models/user");
+const ExpressError = require("./utils/ExpressError")
 const passport = require("passport");
+const LocalStrategy = require("passport-local")
 const session = require("express-session");
-const LocalStrategy = require("passport-local");
 const flash = require("connect-flash");
+const User = require("./models/user.js")
+
+
+const userRoutes = require('./routes/user');
+const dashboardRoutes = require('./routes/dashboard');
 
 const port = 3000;
 const MONGO_URL = "mongodb://127.0.0.1:27017/skillColab";
@@ -51,12 +57,14 @@ passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
+// Middleware for logging request time
 app.use((req, res, next) => {
     req.responseTime = new Date(Date.now()).toString();
     console.log(req.method, req.path, req.responseTime, req.hostname);
     next();
 });
 
+// Middleware for setting locals
 app.use((req, res, next) => {
     res.locals.success = req.flash("success");
     res.locals.error = req.flash("error");
@@ -64,70 +72,19 @@ app.use((req, res, next) => {
     next();
 });
 
-app.get("/", (req, res) => {
-    res.send("I'm groot");
+// Use Routes
+app.use(userRoutes); // For user-related routes
+app.use(dashboardRoutes); // For dashboard-related routes
+
+// Unwanted route
+app.all("*", (req, res, next) => {
+    next(new ExpressError(404, "Page Not Found!"))
 });
 
-app.get("/register", (req, res) => {
-    res.render("users/register");
-});
-
-app.post("/register", async (req, res) => {
-    const { firstName, lastName, email, username, phoneNo, skills, role, password, confirmPassword, status } = req.body;
-
-    const existingUserByEmail = await User.findOne({ email });
-    const existingUserByUsername = await User.findOne({ username });
-    const existingUserByPhoneNo = await User.findOne({ phoneNo });
-
-    if (existingUserByEmail) {
-        return res.send("Email already in use. Please try another.");
-    }
-    else if (existingUserByUsername) {
-        return res.send("Username already taken. Please try another.");
-    }
-    else if (existingUserByPhoneNo) {
-        return res.send("Phone-no already in use. Please try another.");
-    }
-
-    if (password !== confirmPassword) {
-        return res.send("Passwords do not match. Please try again.");
-    }
-
-    try {
-        const newUser = new User({
-            firstName,
-            lastName,
-            email,
-            username,
-            phoneNo,
-            skills: skills.split(",").slice(0, 25),
-            role,
-            status: status === 'on' ? true : false,
-        });
-
-        await User.register(newUser, password);
-        res.send("Registration successful!");
-    } catch (err) {
-        console.log(err);
-        res.send("Error registering user.");
-    }
-});
-
-app.get("/login", (req, res) => {
-    res.render("users/login");
-});
-
-app.post("/login", passport.authenticate('local', {
-    successRedirect: '/',
-    failureRedirect: '/login',
-    failureFlash: true
-}), (req, res) => {});
-
-app.get("/logout", (req, res) => {
-    req.logout((err) => {
-        if (err) { return next(err); }
-        res.redirect("/login");
-    });
+// Error handling
+app.use((err, req, res, next) => {
+    let {statusCode = 500, message = "Something went wrong!"} = err
+    res.status(statusCode).render("error.ejs", { message })
 });
 
 app.listen(port, () => {

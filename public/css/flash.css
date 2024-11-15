@@ -1,0 +1,38 @@
+.custom-alert {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px 20px;
+    border-radius: 8px;
+    background: linear-gradient(135deg, #2e6018, rgba(144, 200, 68, 0.68));
+    color: white;
+    font-size: 1rem;
+    font-weight: 500;
+    position: relative;
+    margin-bottom: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    opacity: 1;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.custom-alert .message {
+    flex: 1;
+}
+
+.custom-alert .close-btn {
+    background: transparent;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: white;
+    transition: transform 0.2s ease;
+}
+
+.custom-alert .close-btn:hover {
+    transform: scale(1.2);
+}
+
+.error-alert {
+    background: linear-gradient(135deg, #601818, rgba(200, 68, 68, 0.8));
+    color: white;
+}

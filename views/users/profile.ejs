@@ -1,0 +1,202 @@
+<% layout("layouts/boilerplate") %>
+
+<h1>Profile of <%= currUser.firstName %> <%= currUser.lastName %></h1>
+<link rel="stylesheet" href="profile.css">
+
+<div class="profile-container">
+    <div class="profile-left">
+        <div class="profile-pic-container">
+            <img
+                    src="<%= currUser.profilePic || 'https://img.freepik.com/premium-photo/young-smiling-man-cartoon-showing-ok-sign_894067-15510.jpg' %>"
+                    alt="<%= currUser.username %>'s Profile Picture"
+                    class="profile-pic">
+        </div>
+    </div>
+
+    <div class="profile-right">
+        <div class="profile-info">
+            <p><b> <%= currUser.firstName %> <%= currUser.lastName %> </b></p>
+            <p><strong>Email:</strong> <%= currUser.email %></p>
+            <p><strong>Phone Number:</strong> <%= currUser.phoneNo %></p>
+        </div>
+
+        <div class="profile-skills">
+            <h2>Skills</h2>
+            <ul>
+                <% currUser.skills.forEach(skill => { %>
+                    <li><%= skill %></li>
+                <% }) %>
+            </ul>
+
+            <h2>Roles</h2>
+            <ul>
+                <% currUser.role.forEach(role => { %>
+                    <li><%= role %></li>
+                <% }) %>
+            </ul>
+        </div>
+
+        <div class="profile-status">
+            <h2>Status</h2>
+            <p><%= currUser.status ? 'Active' : 'Inactive' %></p>
+        </div>
+
+        <div class="edit-profile">
+            <a href="/edit-profile" class="btn-edit">Edit Profile</a>
+        </div>
+
+        <a href="/logout" class="btn btn-danger mt-3">Logout</a>
+    </div>
+</div>
+
+<style>
+
+    /* General styles */
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f7fc;
+        margin: 0;
+        padding: 0;
+    }
+
+    h1 {
+        text-align: center;
+        margin-top: 30px;
+        font-size: 24px;
+        color: #333;
+    }
+
+    .profile-container {
+        display: flex;
+        justify-content: space-between;
+        padding: 30px;
+        margin: 20px auto;
+        border-radius: 10px;
+        width: 80%;
+        max-width: 1000px;
+        background: lightgrey;
+        background: linear-gradient(145deg, #ff6b6b, #d43636);
+        box-shadow: 2px 3px 3px #ba2f2f, 2px 3px 3px #ff4949;
+    }
+
+    /* Profile Picture Styles */
+    .profile-pic-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .profile-pic {
+        width: 150px;  /* Adjusted for a smaller profile picture */
+        height: 150px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 3px solid #ddd;
+    }
+
+    .profile-left {
+        flex: 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .profile-right {
+        flex: 2;
+        margin-left: 20px;
+    }
+
+    /* Profile Info Styles */
+    .profile-info, .profile-skills, .profile-roles, .profile-status {
+        margin-bottom: 20px;
+        background-color: rgba(255, 255, 255, 0.9);
+        border-radius: 8px;
+        padding: 15px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .profile-info h2, .profile-skills h2, .profile-roles h2, .profile-status h2 {
+        font-size: 18px;
+        color: #444;
+        margin-bottom: 10px;
+    }
+
+    .profile-info p, .profile-skills ul, .profile-roles ul, .profile-status p {
+        font-size: 14px;
+        color: #555;
+        margin: 10px 0;
+    }
+
+    .profile-skills ul, .profile-roles ul {
+        list-style-type: none;
+        padding-left: 0;
+    }
+
+    .profile-skills li, .profile-roles li {
+        padding: 5px;
+        background-color: rgba(255, 255, 255, 0.7);
+        border-radius: 5px;
+        margin-bottom: 5px;
+    }
+
+    /* Button Styles */
+    .btn-edit, .btn-danger {
+        display: inline-block;
+        padding: 10px 20px;
+        font-size: 14px;
+        color: white;
+        text-align: center;
+        border-radius: 5px;
+        text-decoration: none;
+        margin: 10px;
+    }
+
+    .btn-edit {
+        background-color: #ff6b6b;
+    }
+
+    .btn-edit:hover {
+        background-color: #d43636;
+    }
+
+    .btn-danger {
+        background-color: #ff4949;
+    }
+
+    .btn-danger:hover {
+        background-color: #ba2f2f;
+    }
+
+    .mt-3 {
+        margin-top: 20px;
+    }
+
+    /* Skills and Roles Layout */
+    .profile-skills-roles {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+        .profile-container {
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .profile-left, .profile-right {
+            flex: unset;
+            margin: 10px 0;
+        }
+
+        .profile-info, .profile-skills, .profile-roles, .profile-status {
+            width: 100%;
+        }
+
+        .profile-pic {
+            width: 120px;
+            height: 120px;
+        }
+    }
+
+</style>

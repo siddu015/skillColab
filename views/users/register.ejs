@@ -1,55 +1,240 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Register - SkillColab</title>
-    <link rel="stylesheet" href="../../public/css/style.css">
-</head>
-<body>
-<h1>Register for SkillColab</h1>
-<form action="/register" method="POST">
-    <!-- First Name -->
-    <label for="firstName">First Name:</label>
-    <input type="text" id="firstName" name="firstName" required>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
 
-    <!-- Last Name -->
-    <label for="lastName">Last Name:</label>
-    <input type="text" id="lastName" name="lastName" required>
+<a class="navbar-brand" href="/dashboard">
+    <i class="fa-solid fa-laptop-code" style="font-size: 1.5rem;"></i>
+    <span class="ms-2"><b>SkillColab</b></span>
+</a>
 
-    <!-- Email -->
-    <label for="email">Email:</label>
-    <input type="email" id="email" name="email" required>
+<div class="register-page">
+    <h1>Register</h1>
 
-    <!-- Username -->
-    <label for="username">Username:</label>
-    <input type="text" id="username" name="username" required>
+    <div class="container">
+        <form action="/register" method="POST" class="form">
+            <div class="row">
+                <div class="input-group">
+                    <label for="firstName">First Name:</label>
+                    <input type="text" id="firstName" name="firstName" required placeholder="Enter your first name">
+                </div>
 
-    <!-- Phone Number -->
-    <label for="phoneNo">Phone Number:</label>
-    <input type="tel" id="phoneNo" name="phoneNo" required>
+                <div class="input-group">
+                    <label for="lastName">Last Name:</label>
+                    <input type="text" id="lastName" name="lastName" required placeholder="Enter your last name">
+                </div>
+            </div>
 
-    <!-- Skills (Max 25 skills) -->
-    <label for="skills">Skills (comma-separated, max 25):</label>
-    <input type="text" id="skills" name="skills" placeholder="e.g., JavaScript, Python, React" required>
+            <div class="row">
+                <div class="input-group">
+                    <label for="username">Username:</label>
+                    <input type="text" id="username" name="username" required placeholder="Choose a username">
+                </div>
 
-    <!-- Roles (Max 5 roles) -->
-    <label for="role">Roles (comma-separated, max 5):</label>
-    <input type="text" id="role" name="role" placeholder="e.g., Frontend Developer, Fullstack" required>
+                <div class="input-group">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" required placeholder="Enter your email">
+                </div>
+            </div>
 
-    <!-- Password -->
-    <label for="password">Password:</label>
-    <input type="password" id="password" name="password" required>
+            <div class="row">
+                <div class="input-group">
+                    <label for="phoneNo">Phone Number:</label>
+                    <input type="tel" id="phoneNo" name="phoneNo" required placeholder="Enter your phone number" pattern="[0-9]{10}">
+                </div>
+            </div>
 
-    <!-- Confirm Password -->
-    <label for="confirmPassword">Confirm Password:</label>
-    <input type="password" id="confirmPassword" name="confirmPassword" required>
+            <div class="row">
+                <div class="input-group">
+                    <label for="skills">Skills (Max 25):</label>
+                    <input type="text" id="skills" name="skills" required placeholder="e.g., JavaScript, Python">
+                </div>
+                <div class="input-group">
+                    <label for="role">Roles (Max 5):</label>
+                    <input type="text" id="role" name="role" required placeholder="e.g., Frontend, Fullstack">
+                </div>
+            </div>
 
-    <!-- Status -->
-    <label for="status">Available:</label>
-    <input type="checkbox" id="status" name="status" value="true" checked>
+            <div class="row">
+                <div class="input-group">
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" name="password" required placeholder="Choose a password">
+                </div>
 
-    <button type="submit">Register</button>
-</form>
-</body>
-</html>
+                <div class="input-group">
+                    <label for="confirmPassword">Confirm Password:</label>
+                    <input type="password" id="confirmPassword" name="confirmPassword" required placeholder="Confirm your password">
+                </div>
+            </div>
+
+            <button type="submit" class="register-button">Register</button>
+        </form>
+    </div>
+</div>
+
+<style>
+    html, body {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+    }
+
+    .navbar-brand {
+        display: flex;
+        align-items: center;
+        position: absolute;
+        left: 20px;
+        top: 20px;
+        color: #84dbf3;
+        text-decoration: none;
+    }
+
+    .navbar-brand span {
+        font-weight: bold;
+        font-size: 1.2rem;
+    }
+
+    .navbar-brand i {
+        font-size: 1.5rem;
+        margin-right: 8px; /* Space between the icon and text */
+    }
+
+    .register-page {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        width: 100%;
+        background: linear-gradient(135deg, rgba(10, 28, 64, 0.9), rgba(38, 116, 160, 0.7));
+        text-align: center;
+        flex-direction: column;
+    }
+
+    h1 {
+        font-weight: bold;
+        font-size: 40px;
+        color: black;
+        margin-bottom: 50px;
+    }
+
+    .container {
+        max-width: 700px;
+        background: #F8F9FD;
+        background: linear-gradient(135deg, rgba(10, 28, 64, 0.9), rgba(38, 116, 160, 0.7));
+        border-radius: 15px;
+        padding: 30px 40px;
+        box-shadow: rgba(133, 189, 215, 0.5) 0px 30px 30px -20px;
+        width: 100%;
+    }
+
+    .form {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        margin-top: 20px;
+    }
+
+    .row {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 15px;
+    }
+
+    .input-group {
+        width: 48%;
+    }
+
+    .input-group label {
+        display: block;
+        font-size: 14px;
+        font-weight: bold;
+        color: white;
+        margin-bottom: 8px;
+        text-align: left;
+        margin-left: 0.5rem;
+    }
+
+    .input-group input {
+        width: 100%;
+        background: white;
+        border: none;
+        padding: 12px 20px;
+        border-radius: 20px;
+        margin-top: 8px;
+        box-shadow: #cff0ff 0px 10px 10px -5px;
+        border-inline: 2px solid transparent;
+    }
+
+    .input-group input::placeholder {
+        color: rgb(170, 170, 170);
+    }
+
+    .input-group input:focus {
+        outline: none;
+        border-inline: 2px solid #12B1D1;
+    }
+
+    .toggle-group {
+        display: flex;
+        align-items: center;
+    }
+
+    .toggle-slider-container {
+        position: relative;
+        width: 50px;
+        height: 25px;
+    }
+
+    .toggle-slider {
+        position: absolute;
+        cursor: pointer;
+        background-color: #ccc;
+        transition: .4s;
+        border-radius: 20px;
+        width: 100%;
+        height: 100%;
+    }
+
+    .toggle-slider:before {
+        position: absolute;
+        content: "";
+        height: 14px;
+        width: 14px;
+        left: 3px;
+        bottom: 3px;
+        background-color: white;
+        transition: .4s;
+        border-radius: 50%;
+    }
+
+    input[type="checkbox"]:checked + .toggle-slider:before {
+        transform: translateX(25px);
+    }
+
+    input[type="checkbox"]:checked + .toggle-slider {
+        background-color: #4CAF50;
+    }
+
+    .register-button {
+        display: block;
+        width: 100%;
+        font-weight: bold;
+        background: linear-gradient(45deg, rgb(16, 137, 211) 0%, rgb(18, 177, 209) 100%);
+        color: white;
+        padding-block: 15px;
+        margin: 20px 0;
+        border-radius: 20px;
+        box-shadow: rgba(133, 189, 215, 0.5) 0px 20px 10px -15px;
+        border: none;
+        transition: all 0.2s ease-in-out;
+    }
+
+    .register-button:hover {
+        transform: scale(1.03);
+        box-shadow: rgba(133, 189, 215, 0.5) 0px 23px 10px -20px;
+    }
+
+    .register-button:active {
+        transform: scale(0.95);
+        box-shadow: rgba(133, 189, 215, 0.5) 0px 15px 10px -10px;
+    }
+
+</style>

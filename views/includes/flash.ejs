@@ -1,0 +1,53 @@
+<link rel="stylesheet" href="/css/flash.css">
+
+<% if (success && success.length) { %>
+    <div class="custom-alert col-6 offset-3" role="alert">
+        <span class="message"><%= success %></span>
+        <button type="button" class="close-btn" aria-label="Close">
+            <span>&times;</span>
+        </button>
+    </div>
+
+    <script>
+        const successAlert = document.querySelector('.custom-alert');
+        if (successAlert) {
+            // Close button for manual dismiss
+            successAlert.querySelector('.close-btn').addEventListener('click', function () {
+                successAlert.style.opacity = '0';
+                setTimeout(() => successAlert.style.display = 'none', 300);
+            });
+
+            // Auto-dismiss after 3 seconds
+            setTimeout(() => {
+                successAlert.style.opacity = '0';
+                setTimeout(() => successAlert.style.display = 'none', 300);
+            }, 3000);
+        }
+    </script>
+<% } %>
+
+<% if (error && error.length) { %>
+    <div class="custom-alert error-alert col-6 offset-3" role="alert">
+        <span class="message"><%= error %></span>
+        <button type="button" class="close-btn" aria-label="Close">
+            <span>&times;</span>
+        </button>
+    </div>
+
+    <script>
+        const errorAlert = document.querySelector('.error-alert');
+        if (errorAlert) {
+            // Close button for manual dismiss
+            errorAlert.querySelector('.close-btn').addEventListener('click', function () {
+                errorAlert.style.opacity = '0';
+                setTimeout(() => errorAlert.style.display = 'none', 300);
+            });
+
+            // Auto-dismiss after 3 seconds
+            setTimeout(() => {
+                errorAlert.style.opacity = '0';
+                setTimeout(() => errorAlert.style.display = 'none', 300);
+            }, 3000);
+        }
+    </script>
+<% } %>

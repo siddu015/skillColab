@@ -9,7 +9,6 @@ module.exports.loginUser = passport.authenticate('local', {
     successRedirect: '/dashboard',
     failureRedirect: '/login',
     failureFlash: 'Invalid username or password. Please try again.',
-    successFlash: 'Welcome back!'
 });
 
 module.exports.logoutUser = (req, res, next) => {
@@ -17,7 +16,6 @@ module.exports.logoutUser = (req, res, next) => {
         if (err) {
             return next(err);
         }
-        req.flash("success", "You have successfully logged out.");
         res.redirect("/dashboard");
     });
 };
@@ -62,8 +60,8 @@ module.exports.registerUser = async (req, res) => {
         });
 
         await User.register(newUser, password);
-        req.flash("success", "Registration successful! Please log in.");
-        res.redirect("/login");
+        req.flash("success", "Welcome to SkillColab");
+        res.redirect("/dashboard");
     } catch (err) {
         console.log(err);
         req.flash("error", "Error registering user. Please try again.");

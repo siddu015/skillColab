@@ -14,6 +14,6 @@ router.route("/register")
     .get(wrapAsync(userController.renderRegisterPage))
     .post((userController.registerUser));
 
-router.get("/profile", isLoggedIn, wrapAsync(userController.renderProfilePage));
+router.get("/profile", wrapAsync(userController.renderProfilePage));
 
 module.exports = router;

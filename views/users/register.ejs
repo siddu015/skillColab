@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - SkillColab</title>
+    <link rel="stylesheet" href="../../public/css/style.css">
+</head>
+<body>
+<h1>Register for SkillColab</h1>
+<form action="/register" method="POST">
+    <!-- First Name -->
+    <label for="firstName">First Name:</label>
+    <input type="text" id="firstName" name="firstName" required>
+
+    <!-- Last Name -->
+    <label for="lastName">Last Name:</label>
+    <input type="text" id="lastName" name="lastName" required>
+
+    <!-- Email -->
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email" required>
+
+    <!-- Username -->
+    <label for="username">Username:</label>
+    <input type="text" id="username" name="username" required>
+
+    <!-- Phone Number -->
+    <label for="phoneNo">Phone Number:</label>
+    <input type="tel" id="phoneNo" name="phoneNo" required>
+
+    <!-- Skills (Max 25 skills) -->
+    <label for="skills">Skills (comma-separated, max 25):</label>
+    <input type="text" id="skills" name="skills" placeholder="e.g., JavaScript, Python, React" required>
+
+    <!-- Roles (Max 5 roles) -->
+    <label for="role">Roles (comma-separated, max 5):</label>
+    <input type="text" id="role" name="role" placeholder="e.g., Frontend Developer, Fullstack" required>
+
+    <!-- Password -->
+    <label for="password">Password:</label>
+    <input type="password" id="password" name="password" required>
+
+    <!-- Confirm Password -->
+    <label for="confirmPassword">Confirm Password:</label>
+    <input type="password" id="confirmPassword" name="confirmPassword" required>
+
+    <!-- Status -->
+    <label for="status">Available:</label>
+    <input type="checkbox" id="status" name="status" value="true" checked>
+
+    <button type="submit">Register</button>
+</form>
+</body>
+</html>

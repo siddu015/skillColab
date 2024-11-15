@@ -1,7 +1,5 @@
-// controllers/user.js
 const User = require("../models/user");
 const passport = require("passport");
-const ExpressError = require("../utils/ExpressError");
 
 module.exports.renderLoginPage = (req, res) => {
     res.render("users/login");
@@ -10,7 +8,8 @@ module.exports.renderLoginPage = (req, res) => {
 module.exports.loginUser = passport.authenticate('local', {
     successRedirect: '/dashboard',
     failureRedirect: '/login',
-    failureFlash: true
+    failureFlash: 'Invalid username or password. Please try again.',
+    successFlash: 'Welcome back!'
 });
 
 module.exports.logoutUser = (req, res, next) => {
@@ -18,7 +17,8 @@ module.exports.logoutUser = (req, res, next) => {
         if (err) {
             return next(err);
         }
-        res.redirect("/login");
+        req.flash("success", "You have successfully logged out.");
+        res.redirect("/dashboard");
     });
 };
 
@@ -40,7 +40,7 @@ module.exports.registerUser = async (req, res) => {
         req.flash("error", "Username already taken. Please try another.");
         return res.redirect("/register");
     } else if (existingUserByPhoneNo) {
-        req.flash("error", "Phone-no already in use. Please try another.");
+        req.flash("error", "Phone number already in use. Please try another.");
         return res.redirect("/register");
     }
 
@@ -66,12 +66,12 @@ module.exports.registerUser = async (req, res) => {
         res.redirect("/login");
     } catch (err) {
         console.log(err);
-        req.flash("error", "Error registering user.");
+        req.flash("error", "Error registering user. Please try again.");
         res.redirect("/register");
     }
 };
 
 module.exports.renderProfilePage = (req, res) => {
-    const currUser = req.user; // Assuming user is logged in and stored in session
+    const currUser = req.user;
     res.render('users/profile', { currUser });
 };

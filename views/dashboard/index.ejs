@@ -1,1 +1,116 @@
+<!-- views/dashboard/index.ejs -->
 <% layout("layouts/boilerplate") %>
+
+<h1>Welcome, <%= currUser ? currUser.firstName : 'Guest' %>!</h1>
+<p>Your dashboard is ready.</p>
+
+<% if (projects.length > 0) { %>
+    <h2>Your Projects:</h2>
+    <div class="projects-container">
+        <% projects.forEach(project => { %>
+            <div class="project-card">
+                <h3><%= project.title %></h3>
+                <p class="project-description"><%= project.description %></p>
+                <p><strong>Status:</strong> <%= project.status %></p>
+                <p><strong>Skills Required:</strong> <%= project.skillsRequired.join(", ") %></p>
+                <p><strong>Roles Required:</strong> <%= project.rolesRequired.join(", ") %></p>
+                <p><strong>Created By:</strong> <%= project.createdBy.firstName %> <%= project.createdBy.lastName %></p>
+                <p><strong>Members:</strong> <%= project.members.map(member => member.firstName + ' ' + member.lastName).join(', ') %></p>
+            </div>
+        <% }); %>
+    </div>
+<% } else { %>
+    <p>You don't have any projects yet.</p>
+<% } %>
+
+<style>
+    /* Container for all projects */
+    .projects-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 1.5rem;
+        margin-top: 2rem;
+    }
+
+    /* Individual project card */
+    .project-card {
+        background-color: #fff;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        padding: 1.5rem;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .project-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Styling for project title */
+    .project-card h3 {
+        font-size: 1.25rem;
+        color: #333;
+        margin-bottom: 0.5rem;
+    }
+
+    /* Project description */
+    .project-description {
+        font-size: 1rem;
+        color: #555;
+        margin-bottom: 1rem;
+    }
+
+    /* General text styles */
+    p {
+        font-size: 1rem;
+        color: #666;
+        margin: 0.5rem 0;
+    }
+
+    strong {
+        color: #333;
+    }
+
+    /* Spacing for the overall layout */
+    h1 {
+        font-size: 2rem;
+        color: #333;
+        margin-bottom: 1rem;
+    }
+
+    h2 {
+        font-size: 1.5rem;
+        color: #444;
+        margin-bottom: 1.5rem;
+    }
+
+    /* Adding responsiveness */
+    @media (max-width: 768px) {
+        .projects-container {
+            grid-template-columns: 1fr;
+            gap: 1rem;
+        }
+
+        h1 {
+            font-size: 1.75rem;
+        }
+
+        h2 {
+            font-size: 1.25rem;
+        }
+
+        .project-card {
+            padding: 1rem;
+        }
+
+        .project-card h3 {
+            font-size: 1.1rem;
+        }
+
+        p {
+            font-size: 0.95rem;
+        }
+    }
+
+</style>

@@ -1,16 +1,19 @@
-// routes/user.js
 const express = require('express');
 const router = express.Router();
-const passport = require('passport');
+const wrapAsync = require("../utils/wrapAsync");
 const { isLoggedIn } = require('../middleware');
-const { registerUser, loginUser, logoutUser, renderRegisterPage, renderLoginPage, renderProfilePage } = require('../controllers/user');
+const userController = require("../controllers/user");
 
-// User Routes
-router.get("/login", renderLoginPage);
-router.post("/login", loginUser);
-router.get("/logout", logoutUser);
-router.get("/register", renderRegisterPage);
-router.post("/register", registerUser);
-router.get("/profile", isLoggedIn, renderProfilePage);
+router.route("/login")
+    .get(wrapAsync(userController.renderLoginPage))
+    .post(userController.loginUser);
+
+router.get("/logout", (userController.logoutUser));
+
+router.route("/register")
+    .get(wrapAsync(userController.renderRegisterPage))
+    .post((userController.registerUser));
+
+router.get("/profile", isLoggedIn, wrapAsync(userController.renderProfilePage));
 
 module.exports = router;
